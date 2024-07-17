@@ -15,10 +15,12 @@
 // Write your code here
 package com.example.dinemaster.service;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.dinemaster.model.Restaurant;
 import com.example.dinemaster.repository.RestaurantJpaRepository;
@@ -35,32 +37,56 @@ public class RestaurantJpaService implements RestaurantRepository {
 
     @Override
     public ArrayList<Restaurant> getRestaurants() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRestaurants'");
+        List<Restaurant> restaurantList = restaurantJpaRepository.findAll();
+        return new ArrayList<>(restaurantList);
+
     }
 
     @Override
     public Restaurant addRestaurant(Restaurant restaurant) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addRestaurant'");
+        return restaurantJpaRepository.save(restaurant);
     }
-
+    
     @Override
     public Restaurant updateRestaurant(int id, Restaurant restaurant) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateRestaurant'");
+        try {
+            Restaurant newRestaurant = restaurantJpaRepository.findById(id).get();
+            if (restaurant.getAddress() != null) {
+                newRestaurant.setAddress(restaurant.getAddress());
+            }
+            if (restaurant.getCuisineType() != null) {
+                newRestaurant.setCuisineType(restaurant.getCuisineType());
+            }
+            if (restaurant.getName() != null) {
+                newRestaurant.setName(restaurant.getName());
+            }
+            if (restaurant.getRating() != 0) {
+                newRestaurant.setRating(restaurant.getRating());
+            }
+
+            return restaurantJpaRepository.save(newRestaurant);
+
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
     @Override
     public Restaurant getRestaurantById(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRestaurantById'");
+        try {
+            return restaurantJpaRepository.findById(id).get();
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
     @Override
     public void deleteRestaurant(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteRestaurant'");
+        try {
+            restaurantJpaRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
     
