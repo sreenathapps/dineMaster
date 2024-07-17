@@ -45,6 +45,12 @@ public class ChefController {
         return chefService.getChefs();
     }
 
+    @GetMapping("/restaurants/chefs/{id}")
+    public Chef getChef(@PathVariable("id") int id) {
+        return chefService.getChefById(id);
+    }
+    
+
     @GetMapping("/chefs/{id}/restaurant")
     public Restaurant getChefRestaurant(@PathVariable("id") int id) {
         return chefService.getChefRestaurant(id);
