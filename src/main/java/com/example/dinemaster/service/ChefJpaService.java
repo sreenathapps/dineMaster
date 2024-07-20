@@ -98,7 +98,9 @@ public class ChefJpaService implements ChefRepository {
     @Override
     public void deleteChef(int id) {
         try {
+            chefJpaRepository.findById(id).get();
             chefJpaRepository.deleteById(id);
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT);
         }
         catch(Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);

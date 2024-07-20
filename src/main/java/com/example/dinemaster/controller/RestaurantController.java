@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -41,6 +43,11 @@ public class RestaurantController {
     public ArrayList<Restaurant> getRestaurants() {
         return restaurantService.getRestaurants();
     }
+    @GetMapping("/restaurants/{id}")
+    public Restaurant getRestaurant(@PathVariable("id") int id) {
+        return restaurantService.getRestaurantById(id);
+    }
+    
     @PostMapping("/restaurants")
     public Restaurant addRestaurant(@RequestBody Restaurant restaurant) {
         return restaurantService.addRestaurant(restaurant);
