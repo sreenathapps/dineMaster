@@ -40,7 +40,7 @@ public class Chef {
     private int experienceYears;
 
     @ManyToOne
-    @JoinColumn(name = "restaurant_id")
+    @JoinColumn(name = "restaurantid")
     private Restaurant restaurant;
 
     public Chef() {}
