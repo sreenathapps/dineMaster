@@ -66,7 +66,7 @@ public class ChefController {
         return chefService.updateChef(id, chef);
     }
 
-    @DeleteMapping("/restaurant/chefs/{id}")
+    @DeleteMapping("/restaurants/chefs/{id}")
     public void deleteChef(@PathVariable("id") int id) {
         chefService.deleteChef(id);
     }
