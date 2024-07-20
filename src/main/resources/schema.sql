@@ -1,4 +1,7 @@
 -- Create Restaurant table
+DROP TABLE IF EXISTS Chef;
+DROP TABLE IF EXISTS Restaurant;
+
 CREATE TABLE IF NOT EXISTS restaurant (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     name TEXT,
@@ -15,5 +18,5 @@ CREATE TABLE IF NOT EXISTS chef (
     expertise TEXT,
     experienceYears INTEGER,
     restaurantid INTEGER,
-    FOREIGN KEY (restaurantid) REFERENCES restaurant(id)
+    FOREIGN KEY (restaurantid) REFERENCES restaurant(id) ON DELETE CASCADE
 );

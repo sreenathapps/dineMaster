@@ -14,7 +14,9 @@ package com.example.dinemaster.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.dinemaster.model.Restaurant;
 import com.example.dinemaster.service.RestaurantJpaService;
@@ -61,5 +63,6 @@ public class RestaurantController {
     @DeleteMapping("/restaurants/{restaurantId}")
     public void deleteRestaurant(@PathVariable("restaurantId") int id) {
         restaurantService.deleteRestaurant(id);
+        throw new ResponseStatusException(HttpStatus.NO_CONTENT);
     }
 }

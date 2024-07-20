@@ -84,7 +84,6 @@ public class RestaurantJpaService implements RestaurantRepository {
     public void deleteRestaurant(int id) {
         try {
             restaurantJpaRepository.deleteById(id);
-            throw new ResponseStatusException(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

@@ -14,11 +14,15 @@ package com.example.dinemaster.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.dinemaster.model.Chef;
 import com.example.dinemaster.model.Restaurant;
 import com.example.dinemaster.service.ChefJpaService;
+
+import net.bytebuddy.implementation.bytecode.Throw;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,6 +73,7 @@ public class ChefController {
     @DeleteMapping("/restaurants/chefs/{id}")
     public void deleteChef(@PathVariable("id") int id) {
         chefService.deleteChef(id);
+        throw new ResponseStatusException(HttpStatus.NO_CONTENT);
     }
 
     
